@@ -27,6 +27,43 @@ export default function Home() {
   const [isLoadingLogs, setIsLoadingLogs] = useState(false);
   const [isPurging, setIsPurging] = useState(false);
 
+  // RAG State
+  const [uploadFile, setUploadFile] = useState<File | null>(null);
+  const [isTraining, setIsTraining] = useState(false);
+  const [trainingStatus, setTrainingStatus] = useState<{ type: 'info' | 'success' | 'error', msg: string }>({ type: 'info', msg: '' });
+
+  const handleTrain = async () => {
+    if (!uploadFile) return;
+    setIsTraining(true);
+    setTrainingStatus({ type: 'info', msg: 'Uploading and processing...' });
+
+    const formData = new FormData();
+    formData.append('file', uploadFile);
+
+    try {
+      const res = await fetch('/api/train', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Training failed');
+      }
+
+      setTrainingStatus({ type: 'success', msg: `Success! Vectors: ${data.embeddedChunks}` });
+      setUploadFile(null);
+      // Reset status after 3s
+      setTimeout(() => setTrainingStatus({ type: 'info', msg: '' }), 3000);
+    } catch (error: any) {
+      console.error("Training error:", error);
+      setTrainingStatus({ type: 'error', msg: error.message });
+    } finally {
+      setIsTraining(false);
+    }
+  };
+
   const fetchLogs = async (channelId: string) => {
     if (!channelId) {
       setChatLogs([]);
@@ -523,6 +560,74 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* Knowledge Base Section */}
+        <div className="relative group">
+          {/* Glow Effect */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-fuchsia-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
+
+          <div className="relative bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl shadow-slate-950/50">
+            {/* Card Header */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-base font-semibold text-slate-100">Knowledge Base</h2>
+                  <p className="text-xs text-slate-500">Inject raw data into vector memory</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="relative group/input">
+                <input
+                  type="file"
+                  accept=".pdf"
+                  onChange={(e) => setUploadFile(e.target.files?.[0] || null)}
+                  className="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-violet-900/50 file:text-violet-300 hover:file:bg-violet-800/50 cursor-pointer"
+                />
+              </div>
+
+              {trainingStatus.msg && (
+                <div className={`text-xs font-mono p-2 rounded-lg ${trainingStatus.type === 'error' ? 'text-rose-400 bg-rose-500/10' : trainingStatus.type === 'success' ? 'text-emerald-400 bg-emerald-500/10' : 'text-violet-400 bg-violet-500/10'}`}>
+                  {trainingStatus.msg}
+                </div>
+              )}
+
+              <div className="flex justify-end">
+                <button
+                  onClick={handleTrain}
+                  disabled={!uploadFile || isTraining}
+                  className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-violet-900/20"
+                >
+                  {isTraining ? (
+                    <>
+                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      </svg>
+                      Training...
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      Upload & Train
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         {/* Footer Stats */}
         <div className="flex justify-center gap-8 text-xs text-slate-500 font-mono">
           <span>LATENCY: &lt;50ms</span>
@@ -532,6 +637,6 @@ export default function Home() {
           <span>REGION: GLOBAL</span>
         </div>
       </div>
-    </main>
+    </main >
   );
 }
