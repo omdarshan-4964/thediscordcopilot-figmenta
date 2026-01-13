@@ -211,432 +211,251 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center justify-center p-4 font-sans relative overflow-hidden">
+    <main className="h-screen w-full bg-slate-950 text-slate-100 font-sans relative overflow-hidden flex flex-col">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-cyan-900/20 via-transparent to-transparent" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black z-0 pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/20 via-purple-900/20 to-transparent z-0 pointer-events-none" />
+      <div className="fixed inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)] z-0 pointer-events-none" />
 
-      {/* Animated Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.03)_1px,transparent_1px)] bg-[size:64px_64px]" />
+      {/* Main Container Wrapper */}
+      <div className="relative z-10 flex flex-col h-full w-full">
 
-      <div className="w-full max-w-4xl space-y-6 relative z-10 py-10">
-        {/* Header Section */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <div className="space-y-1">
-              <div className="flex items-center gap-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-lg shadow-emerald-500/50 animate-pulse" />
-                <span className="text-xs font-medium text-emerald-400 uppercase tracking-widest">System Online</span>
-              </div>
-              <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-2xl">
-                Figmenta Control Deck
-              </h1>
-              <p className="text-slate-400 text-sm">
-                Neural Interface • AI Command Center
-              </p>
-            </div>
-
-            {/* Status Badge */}
-            <div className="hidden sm:flex flex-col items-end gap-1">
-              <div className="px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50" />
-                  <span className="text-xs font-mono text-cyan-400">CORE_ACTIVE</span>
-                </div>
-              </div>
-              <button
-                onClick={handleSignOut}
-                className="text-xs text-slate-500 hover:text-rose-400 font-mono transition-colors flex items-center gap-1"
-              >
-                <span>LOGOUT</span>
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-              </button>
+        {/* Header Section (Fixed Height) */}
+        <header className="flex-none px-6 py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/5 bg-slate-950/50 backdrop-blur-md">
+          <div className="space-y-1">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tighter bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(34,211,238,0.3)]">
+              FIGMENTA CONTROL DECK
+            </h1>
+            <div className="flex items-center gap-3 text-[10px] font-mono text-cyan-500/80 tracking-widest uppercase">
+              <span>System.v.1.0</span>
+              <span className="w-1 h-1 rounded-full bg-cyan-500/50" />
+              <span>Neural Interface Ready</span>
             </div>
           </div>
-        </div>
 
-        {/* Instructions Control Panel - Glassmorphism Card */}
-        <div className="relative group">
-          {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <div className="relative bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl shadow-slate-950/50">
-            {/* Card Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/25">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-base font-semibold text-slate-100">System Instructions</h2>
-                  <p className="text-xs text-slate-500">Configure AI behavioral parameters</p>
-                </div>
-              </div>
-
-              {/* Mini Status Lights */}
-              <div className="flex items-center gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
-                <div className="w-2 h-2 rounded-full bg-amber-500 shadow-sm shadow-amber-500/50" />
-                <div className="w-2 h-2 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50" />
-              </div>
+          <div className="flex items-center gap-4">
+            {/* Status Indicators */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono">
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              SYSTEM ONLINE
             </div>
-
-            {/* Textarea Container */}
-            <div className="relative">
-              {isLoading ? (
-                <div className="w-full h-52 bg-slate-950/50 border border-slate-700/50 rounded-xl p-6 flex flex-col items-center justify-center gap-3">
-                  <div className="w-10 h-10 border-4 border-slate-700 border-t-cyan-500 rounded-full animate-spin" />
-                  <span className="text-slate-500 font-mono text-sm">Initializing neural link...</span>
-                </div>
-              ) : (
-                <div className="relative group/input">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/30 to-purple-500/30 rounded-xl blur opacity-0 group-focus-within/input:opacity-100 transition-opacity duration-300" />
-                  <textarea
-                    id="instructions"
-                    value={instructions}
-                    onChange={(e) => setInstructions(e.target.value)}
-                    placeholder="Initialize AI directive protocols..."
-                    className="relative w-full h-52 bg-slate-950/80 border border-slate-700/50 rounded-xl p-4 text-slate-200 placeholder-slate-600 focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 outline-none transition-all duration-300 resize-none font-mono text-sm leading-relaxed backdrop-blur-sm"
-                  />
-                </div>
-              )}
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-mono">
+              <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+              SECURE
             </div>
+            <button
+              onClick={handleSignOut}
+              className="ml-2 text-[10px] text-slate-500 hover:text-rose-400 font-mono transition-colors flex items-center gap-1 group"
+            >
+              <span>[LOGOUT]</span>
+            </button>
+          </div>
+        </header>
 
-            {/* Footer Controls */}
-            <div className="mt-5 flex flex-col sm:flex-row justify-between items-center gap-3">
-              {/* Status Messages for Instructions */}
-              <div className="flex items-center gap-3 text-sm font-medium">
-                {status === 'idle' && (
-                  <span className="text-slate-500 flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-500" />
-                    Ready for input
-                  </span>
-                )}
-                {status === 'saving' && (
-                  <span className="text-cyan-400 flex items-center gap-2">
-                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    Transmitting data...
-                  </span>
-                )}
-                {status === 'success' && (
-                  <span className="text-emerald-400 flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Protocol updated successfully
-                  </span>
-                )}
-                {status === 'error' && (
-                  <span className="text-rose-400 flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Transmission failed
-                  </span>
-                )}
-              </div>
+        {/* Scrollable Content Area */}
+        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-              {/* Action Button */}
-              <button
-                onClick={handleSave}
-                disabled={isLoading || status === 'saving'}
-                className={`relative group/btn px-6 py-2.5 font-semibold rounded-xl transition-all duration-300 ${isLoading || status === 'saving'
-                  ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                  : 'text-white cursor-pointer'
-                  }`}
-              >
-                {!(isLoading || status === 'saving') && (
-                  <>
-                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-xl blur-md opacity-70 group-hover/btn:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-xl" />
-                  </>
-                )}
-                <span className="relative flex items-center gap-2">
-                  {status === 'saving' ? (
-                    'Processing...'
+            {/* Column 1 (Span 2): System Instructions */}
+            <section className="lg:col-span-2 flex flex-col">
+              <div className="relative group bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-3xl p-6 hover:border-cyan-500/30 transition-all duration-300 overflow-hidden flex flex-col min-h-[450px]">
+                {/* Corner accents */}
+                <div className="absolute top-0 left-0 w-20 h-20 bg-cyan-500/10 blur-3xl -z-10" />
+                <div className="absolute bottom-0 right-0 w-20 h-20 bg-purple-500/10 blur-3xl -z-10" />
+
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold text-white tracking-wide flex items-center gap-2">
+                    <svg className="w-5 h-5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    SYSTEM INSTRUCTIONS
+                  </h2>
+                  <div className="text-[10px] font-mono text-slate-500 border border-white/5 px-2 py-1 rounded bg-black/20">
+                    ID: SYS_CORE_01
+                  </div>
+                </div>
+
+                <div className="flex-grow flex flex-col relative z-20">
+                  {isLoading ? (
+                    <div className="flex-1 flex flex-col items-center justify-center gap-4 text-cyan-500/50">
+                      <div className="w-10 h-10 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin" />
+                      <span className="font-mono text-xs animate-pulse">ESTABLISHING UPLINK...</span>
+                    </div>
                   ) : (
-                    <>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                      </svg>
-                      Deploy Changes
-                    </>
+                    <textarea
+                      id="instructions"
+                      value={instructions}
+                      onChange={(e) => setInstructions(e.target.value)}
+                      placeholder="// Awaiting behavioral directive input..."
+                      className="w-full flex-1 bg-black/40 border border-white/5 rounded-xl p-4 text-slate-300 placeholder-slate-600 focus:border-cyan-500/40 focus:ring-1 focus:ring-cyan-500/40 outline-none transition-all duration-300 resize-none font-mono text-sm leading-relaxed"
+                    />
                   )}
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Active Channels Section */}
-        <div className="relative group">
-          {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <div className="relative bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl shadow-slate-950/50">
-            {/* Card Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
                 </div>
-                <div>
-                  <h2 className="text-base font-semibold text-slate-100">Active Channels</h2>
-                  <p className="text-xs text-slate-500">Manage granted access nodes</p>
+
+                <div className="mt-4 flex items-center justify-between border-t border-white/5 pt-4">
+                  <div className="flex items-center gap-4 text-[10px] font-mono">
+                    {status === 'idle' && <span className="text-slate-500">STATUS: READY</span>}
+                    {status === 'saving' && <span className="text-cyan-400 animate-pulse">STATUS: UPLOADING...</span>}
+                    {status === 'success' && <span className="text-emerald-400">STATUS: SYNC_COMPLETE</span>}
+                    {status === 'error' && <span className="text-rose-400">STATUS: UPLOAD_FAILED</span>}
+                  </div>
+                  <button
+                    onClick={handleSave}
+                    disabled={isLoading || status === 'saving'}
+                    className={`group relative px-5 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold tracking-wider rounded-lg transition-all shadow-[0_0_20px_rgba(6,182,212,0.3)] hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden`}
+                  >
+                    <span className="relative z-10 flex items-center gap-2">
+                      {status === 'saving' ? 'PROCESSING...' : 'DEPLOY PROTOCOL'}
+                    </span>
+                  </button>
                 </div>
               </div>
-            </div>
+            </section>
 
-            <div className="space-y-4">
-              {/* Add Channel Input */}
-              <div className="flex gap-2">
-                <div className="relative flex-1 group/input">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-emerald-500/30 to-teal-500/30 rounded-xl blur opacity-0 group-focus-within/input:opacity-100 transition-opacity duration-300" />
+            {/* Column 2 (Span 1): Stack */}
+            <div className="flex flex-col gap-6">
+              {/* Active Channels */}
+              <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-3xl p-6 hover:border-cyan-500/30 transition-all duration-300 flex flex-col h-full max-h-[400px]">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-md font-bold text-white flex items-center gap-2">
+                    <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    ACTIVE CHANNELS
+                  </h2>
+                </div>
+
+                <div className="flex gap-2 mb-4 shrink-0">
                   <input
                     type="text"
                     value={newChannelInput}
                     onChange={(e) => setNewChannelInput(e.target.value)}
-                    placeholder="Enter Discord Channel ID..."
-                    className="relative w-full bg-slate-950/80 border border-slate-700/50 rounded-xl px-4 py-2.5 text-slate-200 placeholder-slate-600 focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all duration-300 font-mono text-sm backdrop-blur-sm"
+                    placeholder="CHANNEL_ID"
+                    className="bg-black/40 border border-white/5 rounded-lg px-3 py-2 text-xs font-mono text-white placeholder-slate-600 focus:border-emerald-500/40 outline-none w-full"
                   />
+                  <button
+                    onClick={addChannel}
+                    disabled={channelStatus === 'adding' || !newChannelInput.trim()}
+                    className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/50 rounded-lg px-3 py-2 transition-colors disabled:opacity-50"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                  </button>
                 </div>
-                <button
-                  onClick={addChannel}
-                  disabled={channelStatus === 'adding' || !newChannelInput.trim()}
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-emerald-900/20"
-                >
-                  {channelStatus === 'adding' ? (
-                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
+
+                <div className="flex-1 overflow-y-auto custom-scrollbar space-y-2 bg-black/20 rounded-xl p-2 border border-white/5">
+                  {isLoading ? (
+                    <div className="text-center text-[10px] text-slate-600 font-mono py-4">SCANNING...</div>
+                  ) : channels.length === 0 ? (
+                    <div className="text-center text-[10px] text-slate-600 font-mono py-4">NO_NODES_FOUND</div>
                   ) : (
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                  )}
-                  Authorize
-                </button>
-              </div>
-
-              {/* Channel List */}
-              <div className="space-y-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar">
-                {isLoading ? (
-                  <div className="text-center py-4 text-slate-500 text-sm font-mono">Scanning network nodes...</div>
-                ) : channels.length === 0 ? (
-                  <div className="text-center py-8 border border-dashed border-slate-800 rounded-xl">
-                    <p className="text-slate-500 text-sm">No active channels found</p>
-                  </div>
-                ) : (
-                  (channels || []).map((channel) => (
-                    <div
-                      key={channel.channel_id}
-                      className="group flex items-center justify-between p-3 bg-slate-950/50 border border-slate-800 hover:border-emerald-500/30 rounded-xl transition-all duration-200"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/50" />
-                        <span className="font-mono text-sm text-slate-300">{channel.channel_id}</span>
-                      </div>
-                      <button
-                        onClick={() => removeChannel(channel.channel_id)}
-                        disabled={channelStatus === 'removing'}
-                        className="text-slate-600 hover:text-rose-500 transition-colors p-1 rounded-lg hover:bg-rose-500/10"
-                        title="Revoke Access"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
-                      </button>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Neural Link (Memory) Section */}
-        <div className="relative group">
-          {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-rose-500/20 via-orange-500/20 to-amber-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <div className="relative bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl shadow-slate-950/50">
-            {/* Card Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-rose-500 to-orange-600 flex items-center justify-center shadow-lg shadow-rose-500/25">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-base font-semibold text-slate-100">Neural Link</h2>
-                  <p className="text-xs text-slate-500">Memory inspection and purge protocols</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {/* Channel Selector */}
-              <div className="relative group/select">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-rose-500/30 to-orange-500/30 rounded-xl blur opacity-0 group-focus-within/select:opacity-100 transition-opacity duration-300" />
-                <select
-                  value={selectedChannelId}
-                  onChange={(e) => {
-                    setSelectedChannelId(e.target.value);
-                    fetchLogs(e.target.value);
-                  }}
-                  className="relative w-full bg-slate-950/80 border border-slate-700/50 rounded-xl px-4 py-2.5 text-slate-200 focus:border-rose-500/50 focus:ring-2 focus:ring-rose-500/20 outline-none transition-all duration-300 font-mono text-sm backdrop-blur-sm appearance-none cursor-pointer"
-                >
-                  <option value="">Select a neural pathway (Channel)...</option>
-                  {channels.map(c => (
-                    <option key={c.channel_id} value={c.channel_id}>{c.channel_id}</option>
-                  ))}
-                </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Log Viewer */}
-              <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-4 h-48 overflow-y-auto custom-scrollbar font-mono text-xs space-y-3">
-                {selectedChannelId ? (
-                  isLoadingLogs ? (
-                    <div className="h-full flex flex-col items-center justify-center text-slate-500 gap-2">
-                      <div className="w-5 h-5 border-2 border-rose-500/30 border-t-rose-500 rounded-full animate-spin" />
-                      <span>Decryping memory banks...</span>
-                    </div>
-                  ) : chatLogs.length > 0 ? (
-                    chatLogs.map((log, idx) => (
-                      <div key={idx} className="flex gap-2">
-                        <span className={log.role === 'user' ? 'text-cyan-400' : 'text-emerald-400'}>
-                          [{log.role.toUpperCase()}]:
-                        </span>
-                        <span className="text-slate-300">{log.content}</span>
+                    channels.map(channel => (
+                      <div key={channel.channel_id} className="flex items-center justify-between p-2 rounded bg-white/5 border border-white/5 hover:border-emerald-500/30 group">
+                        <span className="text-[10px] font-mono text-slate-300 truncate max-w-[120px]" title={channel.channel_id}>{channel.channel_id}</span>
+                        <button onClick={() => removeChannel(channel.channel_id)} className="text-slate-500 hover:text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
                       </div>
                     ))
-                  ) : (
-                    <div className="h-full flex items-center justify-center text-slate-600 italic">
-                      No memory fragments found in this sector.
+                  )}
+                </div>
+              </div>
+
+              {/* Knowledge Base */}
+              <div className="bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-3xl p-6 hover:border-cyan-500/30 transition-all duration-300 flex flex-col shrink-0">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-md font-bold text-white flex items-center gap-2">
+                    <svg className="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    KNOWLEDGE BASE
+                  </h2>
+                </div>
+                <div className="flex flex-col gap-3">
+                  <label className="block w-full group cursor-pointer">
+                    <div className="flex items-center justify-center w-full h-20 rounded-xl border-2 border-dashed border-white/10 bg-black/20 group-hover:border-purple-500/40 group-hover:bg-purple-500/5 transition-all">
+                      <div className="flex flex-col items-center justify-center py-2">
+                        {uploadFile ? (
+                          <p className="text-xs text-purple-400 font-mono truncate max-w-[200px]">{uploadFile.name}</p>
+                        ) : (
+                          <>
+                            <svg className="w-6 h-6 mb-1 text-slate-500 group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                            <p className="text-[10px] text-slate-500 font-mono">UPLOAD PDF_DATA</p>
+                          </>
+                        )}
+                      </div>
                     </div>
+                    <input type="file" accept=".pdf" className="hidden" onChange={(e) => setUploadFile(e.target.files?.[0] || null)} />
+                  </label>
+
+                  {trainingStatus.msg && (
+                    <div className={`text-[10px] font-mono p-2 rounded border ${trainingStatus.type === 'error' ? 'border-rose-900/50 bg-rose-900/20 text-rose-400' : 'border-emerald-900/50 bg-emerald-900/20 text-emerald-400'}`}>
+                      {'>'} {trainingStatus.msg}
+                    </div>
+                  )}
+
+                  <button
+                    onClick={handleTrain}
+                    disabled={!uploadFile || isTraining}
+                    className="w-full py-2 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-bold tracking-wider rounded-lg transition-all shadow-lg shadow-purple-900/20 disabled:opacity-50 disabled:cursor-not-allowed uppercase"
+                  >
+                    {isTraining ? 'INGESTING...' : 'INITIATE TRAINING'}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Row (Span 3): Neural Link */}
+            <div className="lg:col-span-3 bg-slate-900/40 backdrop-blur-md border border-white/10 rounded-3xl p-6 hover:border-cyan-500/30 transition-all duration-300">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-md font-bold text-white flex items-center gap-2">
+                  <svg className="w-5 h-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  NEURAL LINK // MEMORY DUMP
+                </h2>
+                <div className="flex gap-4">
+                  <select
+                    value={selectedChannelId}
+                    onChange={(e) => {
+                      setSelectedChannelId(e.target.value);
+                      fetchLogs(e.target.value);
+                    }}
+                    className="bg-black/40 border border-white/5 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-300 focus:border-rose-500/40 outline-none min-w-[200px]"
+                  >
+                    <option value="">SELECT_MEMORY_SECTOR</option>
+                    {channels.map(c => (
+                      <option key={c.channel_id} value={c.channel_id}>{c.channel_id}</option>
+                    ))}
+                  </select>
+                  <button
+                    onClick={purgeMemory}
+                    disabled={!selectedChannelId || isPurging || chatLogs.length === 0}
+                    className="px-4 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 text-xs font-mono rounded-lg transition-all disabled:opacity-30 flex items-center gap-2"
+                  >
+                    {isPurging ? 'PURGING...' : 'PURGE_SECTOR'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="h-48 bg-black/60 border border-white/5 rounded-xl p-4 overflow-y-auto custom-scrollbar font-mono text-xs">
+                {selectedChannelId ? (
+                  isLoadingLogs ? (
+                    <div className="h-full flex items-center justify-center text-rose-500/50 animate-pulse">DECRYPTING...</div>
+                  ) : chatLogs.length > 0 ? (
+                    <div className="space-y-2">
+                      {chatLogs.map((log, idx) => (
+                        <div key={idx} className="flex gap-3 border-b border-white/5 pb-2 last:border-0 last:pb-0">
+                          <span className={`shrink-0 ${log.role === 'user' ? 'text-cyan-400' : 'text-emerald-400'} font-bold w-14`}>
+                            {log.role.toUpperCase()}::
+                          </span>
+                          <span className="text-slate-300 break-words">{log.content}</span>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="h-full flex items-center justify-center text-slate-700">MEMORY_SECTOR_EMPTY</div>
                   )
                 ) : (
-                  <div className="h-full flex items-center justify-center text-slate-600 italic">
-                    Select a channel to inspect neural logs.
-                  </div>
+                  <div className="h-full flex items-center justify-center text-slate-700">AWAITING_SECTOR_SELECTION</div>
                 )}
               </div>
-
-              {/* Purge Button */}
-              <div className="flex justify-end">
-                <button
-                  onClick={purgeMemory}
-                  disabled={!selectedChannelId || isPurging || chatLogs.length === 0}
-                  className="px-4 py-2 bg-rose-900/50 hover:bg-rose-600/80 border border-rose-700/50 text-rose-200 hover:text-white rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-rose-900/20 group/purge"
-                >
-                  {isPurging ? (
-                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-4 h-4 group-hover/purge:animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                    </svg>
-                  )}
-                  Purge Memory
-                </button>
-              </div>
             </div>
+
           </div>
-        </div>
-
-        {/* Knowledge Base Section */}
-        <div className="relative group">
-          {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-fuchsia-500/20 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500" />
-
-          <div className="relative bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-5 shadow-2xl shadow-slate-950/50">
-            {/* Card Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shadow-violet-500/25">
-                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-base font-semibold text-slate-100">Knowledge Base</h2>
-                  <p className="text-xs text-slate-500">Inject raw data into vector memory</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="relative group/input">
-                <input
-                  type="file"
-                  accept=".pdf"
-                  onChange={(e) => setUploadFile(e.target.files?.[0] || null)}
-                  className="block w-full text-sm text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-violet-900/50 file:text-violet-300 hover:file:bg-violet-800/50 cursor-pointer"
-                />
-              </div>
-
-              {trainingStatus.msg && (
-                <div className={`text-xs font-mono p-2 rounded-lg ${trainingStatus.type === 'error' ? 'text-rose-400 bg-rose-500/10' : trainingStatus.type === 'success' ? 'text-emerald-400 bg-emerald-500/10' : 'text-violet-400 bg-violet-500/10'}`}>
-                  {trainingStatus.msg}
-                </div>
-              )}
-
-              <div className="flex justify-end">
-                <button
-                  onClick={handleTrain}
-                  disabled={!uploadFile || isTraining}
-                  className="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white rounded-xl font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-lg shadow-violet-900/20"
-                >
-                  {isTraining ? (
-                    <>
-                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                      </svg>
-                      Training...
-                    </>
-                  ) : (
-                    <>
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                      </svg>
-                      Upload & Train
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        {/* Footer Stats */}
-        <div className="flex justify-center gap-8 text-xs text-slate-500 font-mono">
-          <span>LATENCY: &lt;50ms</span>
-          <span>•</span>
-          <span>UPTIME: 99.9%</span>
-          <span>•</span>
-          <span>REGION: GLOBAL</span>
         </div>
       </div>
-    </main >
+    </main>
   );
 }
