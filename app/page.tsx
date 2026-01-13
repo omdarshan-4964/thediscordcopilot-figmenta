@@ -1,18 +1,20 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+import { supabase } from '@/utils/supabase/client';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const [instructions, setInstructions] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
+    router.refresh();
+  };
 
   // Active Channels State
   const [channels, setChannels] = useState<{ channel_id: string }[]>([]);
@@ -206,7 +208,13 @@ export default function Home() {
                   <span className="text-xs font-mono text-cyan-400">CORE_ACTIVE</span>
                 </div>
               </div>
-              <span className="text-xs text-slate-500 font-mono">v2.1.0</span>
+              <button
+                onClick={handleSignOut}
+                className="text-xs text-slate-500 hover:text-rose-400 font-mono transition-colors flex items-center gap-1"
+              >
+                <span>LOGOUT</span>
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+              </button>
             </div>
           </div>
         </div>
